@@ -146,7 +146,7 @@
     font-size: 35px;
     cursor: pointer;
     transition: 300ms;
-    
+
   }
 
   & button:hover {
@@ -156,13 +156,32 @@
     box-shadow: 2px 2px 5px #0003;
   }
 
-  & #btnSubmit {
+  & #btnSubmit {}
 
+  & .alertLogin {
+    display: block;
+    height: 22px;
+    color: red;
   }
+
+  & h2 {
+    color: #cd9462;
+    text-align: center;
+    margin: 0 0 20px;
+  }
+
 }
 
+/* MB <= 767 - TB <= 1023 - */
+@media screen and (max-width: 767px) {
+  .taskForm {
+    width: 80%;
+  }
 
-
+  .taskList {
+    width: 90%;
+  }
+}
 
 
 
