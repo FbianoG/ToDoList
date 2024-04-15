@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 
-export default function Home() {
+export default function Home(props) {
 
   const task = useRef()
   const category = useRef()
@@ -31,7 +31,7 @@ export default function Home() {
       }
     })
     const token = localStorage.getItem("Token")
-    const response = await fetch(`http://localhost:3000/updateTasks`, {
+    const response = await fetch(`${props.url}/updateTasks`, {
       method: "POST",
       body: JSON.stringify({ token, tasks: updatedTasks }),
       headers: { "Content-Type": "application/json" }
@@ -43,7 +43,7 @@ export default function Home() {
 
   async function getTasks() {
     const token = localStorage.getItem("Token")
-    const response = await fetch(`http://localhost:3000/getTasks`, {
+    const response = await fetch(`${props.url}/getTasks`, {
       method: "POST",
       body: JSON.stringify({ token }),
       headers: { "Content-Type": "application/json" }
@@ -57,13 +57,12 @@ export default function Home() {
     } else if (response.status === 401) {
       location.href = "/"
     }
-
   }
 
   async function createTask(e) {
     e.preventDefault()
     const token = localStorage.getItem("Token")
-    const response = await fetch(`http://localhost:3000/createTask`, {
+    const response = await fetch(`${props.url}/createTask`, {
       method: "POST",
       body: JSON.stringify({ token, task: task.current.value, category: category.current.value }),
       headers: { "Content-Type": "application/json" }
@@ -80,7 +79,7 @@ export default function Home() {
     const token = localStorage.getItem("Token")
     const newTasks = Tasks.filter(element => element._id !== e.target.id)
     setTasks(newTasks)
-    const response = await fetch(`http://localhost:3000/deleteTask`, {
+    const response = await fetch(`${props.url}/deleteTask`, {
       method: "POST",
       body: JSON.stringify({ token, tasks: newTasks }),
       headers: { "Content-Type": "application/json" }

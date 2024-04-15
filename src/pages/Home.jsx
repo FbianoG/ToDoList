@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 
 
-export default function Home() {
-
+export default function Home(props) {
+    
     const formLogin = useRef()
     const loginEmail = useRef()
     const loginPassword = useRef()
@@ -11,17 +11,24 @@ export default function Home() {
 
     async function login(e) {
         e.preventDefault()
-        const response = await fetch(`http://localhost:3000/login`, {
-            method: "POST",
-            body: JSON.stringify({ email: loginEmail.current.value, password: loginPassword.current.value }),
-            headers: { "Content-Type": "application/json" }
-        })
-        if (response.ok) {
-            const data = await response.json()
-            localStorage.setItem("Token", data.token)
-            location.href = "/tasks"
+        try {
+            const response = await fetch(`${props.url}/login`, {
+                method: "POST",
+                body: JSON.stringify({ email: loginEmail.current.value, password: loginPassword.current.value }),
+                headers: { "Content-Type": "application/json" }
+            })
+            if (response.ok) {
+                const data = await response.json()
+                localStorage.setItem("Token", data.token)
+                location.href = "/tasks"
+                console.log(data);
+            } else if (response.status === 401) {
+                console.log("Email ou senha inválidos.");
+            }
+            console.log(response.status)
+        } catch (error) {
+            console.error(error)
         }
-        console.log(response.status)
     }
 
 

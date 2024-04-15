@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+
+
+    <script>
+
+        login()
+
+
+        async function login(e) {
+
+            console.log("olá");
+            try {
+                const response = await fetch(`https://to-do-list-back-coral.vercel.app/login`, {
+                    method: "POST",
+                    body: JSON.stringify({ email: "olá", password: "olá" }),
+                    headers: { "Content-Type": "application/json" }
+                })
+                if (response.ok) {
+                    const data = await response.json()
+                    localStorage.setItem("Token", data.token)
+                    location.href = "/tasks"
+                }
+                console.log(response.status)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
