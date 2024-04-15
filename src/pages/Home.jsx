@@ -47,8 +47,7 @@ export default function Home(props) {
 
     async function createLogin(e) {
         e.preventDefault()
-        btnSubmit.current.setAttribute("disabled", "true")
-        btnSubmit.current.style.opacity = "0.3"
+
         if (createPassword.current.value !== createPassword2.current.value) {
             incorrectLogin("As senhas não conferem.")
             return
@@ -65,8 +64,7 @@ export default function Home(props) {
             } else if (response.status === 400) {
                 incorrectEmail(data.message)
             }
-            btnSubmit.current.removeAttribute("disabled")
-            btnSubmit.current.style.opacity = ""
+
         } catch (error) {
             console.error(error)
         }
@@ -113,7 +111,7 @@ export default function Home(props) {
                     <input type='password' name='createPassword' placeholder='Senha' ref={createPassword} required />
                     <input type='password' name='createPassword2' placeholder='Repita a Senha' ref={createPassword2} required />
                     <span className='alertLogin' ref={alertLogin}></span>
-                    <input type='submit' id='btnSubmit' value="Criar Conta" ref={btnSubmit} />
+                    <input type='submit' id='btnSubmit' value="Criar Conta"  />
                     <input type='button' id='btnSubmit' value="Cancelar" onClick={() => setCreateAcc(false)} />
                 </form>
             }
