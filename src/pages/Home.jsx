@@ -8,12 +8,13 @@ export default function Home(props) {
     const loginPassword = useRef()
     const alertLogin = useRef()
     const btnSubmit = useRef()
-
+    
     const formCreateLogin = useRef()
     const createName = useRef()
     const createEmail = useRef()
     const createPassword = useRef()
     const createPassword2 = useRef()
+    const btnSubmit2 = useRef()
 
     localStorage.clear()
 
@@ -47,8 +48,8 @@ export default function Home(props) {
 
     async function createLogin(e) {
         e.preventDefault()
-        btnSubmit.current.setAttribute("disabled", "true")
-        btnSubmit.current.style.opacity = "0.3"
+        btnSubmit2.current.setAttribute("disabled", "true")
+        btnSubmit2.current.style.opacity = "0.3"
         if (createPassword.current.value !== createPassword2.current.value) {
             incorrectLogin("As senhas não conferem.")
             return
@@ -65,8 +66,8 @@ export default function Home(props) {
             } else if (response.status === 400) {
                 incorrectEmail(data.message)
             }
-            btnSubmit.current.removeAttribute("disabled")
-            btnSubmit.current.style.opacity = ""
+            btnSubmit2.current.removeAttribute("disabled")
+            btnSubmit2.current.style.opacity = ""
         } catch (error) {
             console.error(error)
         }
@@ -113,7 +114,7 @@ export default function Home(props) {
                     <input type='password' name='createPassword' placeholder='Senha' ref={createPassword} required />
                     <input type='password' name='createPassword2' placeholder='Repita a Senha' ref={createPassword2} required />
                     <span className='alertLogin' ref={alertLogin}></span>
-                    <input type='submit' id='btnSubmit' value="Criar Conta"  />
+                    <input type='submit' id='btnSubmit' value="Criar Conta" ref={btnSubmit2} />
                     <input type='button' id='btnSubmit' value="Cancelar" onClick={() => setCreateAcc(false)} />
                 </form>
             }
