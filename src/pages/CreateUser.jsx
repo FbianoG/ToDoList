@@ -41,15 +41,7 @@ export default function Home() {
   }
 
   async function createUser(e) {
-    e.preventDefault()
-    const response = await fetch(`http://localhost:3000/createUser`, {
-      method: "POST",
-      body: JSON.stringify({ email: createEmail.current.value, password: createPassword.current.value, name: createName.current.value }),
-      headers: { "Content-Type": "application/json" }
-    })
-    const data = await response.json()
-    console.log(data)
-
+   
   }
 
   async function login(e) {
