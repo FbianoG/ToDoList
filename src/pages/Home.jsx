@@ -47,7 +47,8 @@ export default function Home(props) {
 
     async function createLogin(e) {
         e.preventDefault()
-
+        btnSubmit.current.setAttribute("disabled", "true")
+        btnSubmit.current.style.opacity = "0.3"
         if (createPassword.current.value !== createPassword2.current.value) {
             incorrectLogin("As senhas não conferem.")
             return
@@ -64,7 +65,8 @@ export default function Home(props) {
             } else if (response.status === 400) {
                 incorrectEmail(data.message)
             }
-
+            btnSubmit.current.removeAttribute("disabled")
+            btnSubmit.current.style.opacity = ""
         } catch (error) {
             console.error(error)
         }
